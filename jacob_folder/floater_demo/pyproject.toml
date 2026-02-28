@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "floater-demo"
+version = "0.1.0"
+description = "Fast 4-class shape-based instance segmentation demo for floater drawings."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "opencv-python",
+  "numpy",
+  "scikit-image",
+  "typer",
+  "rich",
+  "pytest",
+]
+
+[project.scripts]
+floater-demo = "floater_demo.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["floater_demo*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
