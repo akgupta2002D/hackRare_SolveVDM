@@ -36,8 +36,8 @@ export default function SplitLanding({ msg }) {
           {/* Middle buttons (blocked) */}
           <div className="virtuousRightCenter">
             <div className="virtuousButtonRow noFloatersEffect" data-interactive="true">
-              <button className="virtuousBtn virtuousBtnPrimary">Get started</button>
-              <button className="virtuousBtn virtuousBtnSecondary">Learn more</button>
+              <button className="virtuousBtn virtuousBtnPrimary">Patient: Emulator</button>
+              <button className="virtuousBtn virtuousBtnSecondary">Clinicians: Info and Data</button>
             </div>
           </div>
 

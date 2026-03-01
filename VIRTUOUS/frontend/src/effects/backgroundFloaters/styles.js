@@ -1,18 +1,8 @@
-/**
- * Keep styles in one place so you can theme/tweak easily later.
- * (You can replace with Tailwind/CSS Modules whenever you want.)
- */
 export const layerStyles = {
   container: {
     position: "fixed",
     inset: 0,
     zIndex: 0,
-
-    /**
-     * pointerEvents none is crucial:
-     * - Background effects never block clicks
-     * - Hover/click goes to your UI layer above
-     */
     pointerEvents: "none",
     overflow: "hidden",
   },
@@ -27,23 +17,23 @@ export const layerStyles = {
 
   messageWrap: {
     position: "absolute",
-    left: "50%",
-    bottom: "9%",
-    transform: "translateX(-50%)",
-    width: "min(820px, 92vw)",
-    textAlign: "center",
+    right: "3%",                 // occupy right side
+    bottom: "10%",             // 5% from bottom
+    width: "35vw",            // right 35% of screen
+    display: "flex",
+    justifyContent: "center", // keep message centered in its zone
     pointerEvents: "none",
   },
 
   message: {
     fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
-    fontSize: "clamp(18px, 2.2vw, 28px)",
-    fontWeight: 650,
+    fontSize: "clamp(14px, 1.4vw, 18px)", // smaller font
+    fontWeight: 600,
     letterSpacing: "-0.01em",
     color: "rgba(255,255,255,0.95)",
-    textShadow: "0 10px 30px rgba(0,0,0,0.55)",
-    padding: "10px 14px",
-    borderRadius: 16,
+    textShadow: "0 6px 18px rgba(0,0,0,0.55)",
+    padding: "8px 12px",
+    borderRadius: 14,
     backdropFilter: "blur(6px)",
     background: "rgba(0,0,0,0.22)",
     display: "inline-block",
