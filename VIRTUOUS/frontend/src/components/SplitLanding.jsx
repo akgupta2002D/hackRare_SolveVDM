@@ -20,12 +20,19 @@ export default function SplitLanding({ msg }) {
               build with clarity—through simple tools that feel good to use.
             </p>
 
+            {/* NEW: 3-word statement */}
+            <div className="virtuousStatementRow" aria-label="Virtuous values">
+              <div className="virtuousStatement virtuousStatementNavy">Acknowledge</div>
+              <div className="virtuousStatement virtuousStatementRed">Believe</div>
+              <div className="virtuousStatement virtuousStatementGreen">Community</div>
+            </div>
+
             <div className="virtuousSpacer" />
 
-            <div className="virtuousStatus card card--raised">
+            {/* <div className="virtuousStatus card card--raised">
               <div className="virtuousStatusLabel">Backend says</div>
               <pre className="virtuousPre">{msg}</pre>
-            </div>
+            </div> */}
           </div>
         </aside>
 
@@ -46,12 +53,7 @@ export default function SplitLanding({ msg }) {
             </button>
 
             </div>
-          </div>
 
-          <div className="virtuousRightBottom">
-            <button className="virtuousBtn virtuousBtnCorner noFloatersEffect" data-interactive="true">
-              Contact
-            </button>
           </div>
         </main>
       </div>
