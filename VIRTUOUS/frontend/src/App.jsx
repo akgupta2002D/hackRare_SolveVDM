@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 
+// ✅ This is the NEW modular entrypoint (the wrapper/layout)
+// Adjust the import path to match where you placed it.
+import BackgroundEffectsLayout from "./effects/backgroundFloaters/BackgroundEffectsLayout";
+
 export default function App() {
   const [msg, setMsg] = useState("Loading...");
 
@@ -11,14 +15,26 @@ export default function App() {
   }, []);
 
   return (
-    <div style={{ fontFamily: "system-ui", padding: 24 }}>
-      <h1>VIRTUOUS</h1>
-      <p>Platform for VDM</p>
+    <BackgroundEffectsLayout>
+      <div style={{ minHeight: "100vh", padding: 40 }}>
 
-      <h2>Backend says:</h2>
-      <pre style={{ background: "#111", color: "#eee", padding: 16, borderRadius: 12 }}>
-        {msg}
-      </pre>
-    </div>
+        {/* Only block specific UI regions */}
+        <div className="noFloatersEffect">
+          <h1>VIRTUOUS</h1>
+          <p>Platform for VDM</p>
+        </div>
+
+        <div style={{ height: 200 }} />
+        {/* This empty area will allow floaters */}
+
+        <div className="noFloatersEffect">
+          <h2>Backend says:</h2>
+          <pre style={{ background: "#111", color: "#eee", padding: 16 }}>
+            {msg}
+          </pre>
+        </div>
+
+      </div>
+    </BackgroundEffectsLayout>
   );
 }

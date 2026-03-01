@@ -1,0 +1,79 @@
+:root {
+  /* =========================================================
+     Typography (medical/trustworthy, clean)
+  ========================================================= */
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Font sizes */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+
+  /* Line heights */
+  --lh-tight: 1.15;
+  --lh-normal: 1.35;
+  --lh-relaxed: 1.55;
+
+  /* =========================================================
+     Neutral Greys (the real backbone)
+     - bg: app background
+     - surface: cards, panels
+     - surface-2: hover/raised
+     - border: subtle separators
+  ========================================================= */
+  --bg: #0b0c10;
+  --surface: #111318;
+  --surface-2: #161922;
+  --surface-3: #1b2030;
+
+  --text: #e8eaf0;
+  --muted: #a7adbd;
+  --muted-2: #7f879a;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  /* =========================================================
+     Brand / Intent Colors (dark, mature, trustworthy)
+     Use these for modals, key actions, highlights.
+  ========================================================= */
+  --navy: #0f2147;        /* deep navy */
+  --navy-2: #143062;      /* hover/active navy */
+
+  --red: #5a1416;         /* dark red */
+  --red-2: #7a1c1f;       /* hover/active red */
+
+  --green: #0f3a2b;       /* dark green */
+  --green-2: #14503c;     /* hover/active green */
+
+  /* Accent (small highlights) */
+  --accent: #7aa2ff;      /* soft “clinical” blue accent */
+  --accent-2: #9b8cff;    /* subtle secondary accent */
+
+  /* Semantic tokens (use these in UI instead of raw colors) */
+  --primary: var(--accent);
+  --info: var(--navy);
+  --danger: var(--red);
+  --success: var(--green);
+
+  /* =========================================================
+     Layout + Shape
+  ========================================================= */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 22px;
+
+  --s-1: 6px;
+  --s-2: 10px;
+  --s-3: 14px;
+  --s-4: 18px;
+  --s-5: 24px;
+  --s-6: 32px;
+
+  --shadow: 0 12px 38px rgba(0, 0, 0, 0.5);
+}
