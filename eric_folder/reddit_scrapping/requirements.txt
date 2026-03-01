@@ -1,0 +1,7 @@
+requests
+typer
+rich
+scikit-learn
+vaderSentiment
+matplotlib
+pytest

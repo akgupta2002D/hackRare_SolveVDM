@@ -11,70 +11,109 @@ export default function ClinicalDataPage() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.topBar}>
-        <button className={styles.backBtn} onClick={handleBack} type="button">
-          ← Back
-        </button>
-      </header>
+      <button className={styles.backBtn} onClick={handleBack} type="button">
+        ← Back
+      </button>
 
-      <main className={styles.layout}>
-        {/* ROW 1: Clinician message */}
-        <section className={`${styles.row} ${styles.messageRow}`}>
-          <div className={styles.messageCard}>
+      <div className={styles.split}>
+        {/* LEFT COLUMN */}
+        <section className={`${styles.left} card`}>
+          <div className={styles.leftInner}>
             <div className={styles.kicker}>Clinical Data</div>
 
             <h1 className={styles.title}>
-            <span className={styles.titleRed}>We urge you</span> to take eye floaters seriously.
+              <span className={styles.titleRed}>We urge you</span> to take eye
+              floaters seriously.
             </h1>
 
             <p className={styles.subtext}>
-              For some patients, floaters are not a minor nuisance — they can meaningfully
-              reduce quality of life. When symptoms are dismissed, patients often report
-              feeling unheard and alone, which can compound distress and reduce trust in care.
+              For some patients, floaters are not a minor nuisance — they can
+              meaningfully reduce quality of life. When symptoms are dismissed,
+              patients often report feeling unheard and alone, which can compound
+              distress and reduce trust in care.
             </p>
 
-            <ul className={styles.facts}>
-              <li>
-                <span className={styles.factStrong}>Dismissal hurts:</span> when a symptom is
-                treated as “nothing,” patients may stop reporting changes that matter clinically.
-              </li>
-              <li>
-                <span className={styles.factStrong}>Loneliness is common:</span> floaters are
-                hard to “prove” on routine imaging, and patients may feel isolated by the invisibility.
-              </li>
-              <li>
-                <span className={styles.factStrong}>Mental load is real:</span> severe cases are
-                associated with anxiety/depressive symptoms and functional impairment (reading, driving, screens).
-              </li>
-            </ul>
+            <div className={`${styles.infoBlock} card card--raised`}>
+              <h2 className={styles.infoTitle}>Key clinical realities</h2>
+              <ul className={styles.facts}>
+                <li>
+                  <span className={styles.factStrong}>Dismissal hurts:</span>{" "}
+                  when a symptom is treated as “nothing,” patients may stop
+                  reporting changes that matter clinically.
+                </li>
+                <li>
+                  <span className={styles.factStrong}>Loneliness is common:</span>{" "}
+                  floaters are hard to “prove” on routine imaging, and patients
+                  may feel isolated by the invisibility.
+                </li>
+                <li>
+                  <span className={styles.factStrong}>Mental load is real:</span>{" "}
+                  severe cases are associated with anxiety/depressive symptoms
+                  and functional impairment (reading, driving, screens).
+                </li>
+              </ul>
 
-            <div className={styles.note}>
-              Goal: convert subjective descriptions into structured, shareable patient-reported data
-              that clinicians can use for insight, triage, and research.
+              <div className={styles.note}>
+                Goal: convert subjective descriptions into structured, shareable
+                patient-reported data that clinicians can use for insight,
+                triage, and research.
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ROW 2: 3 column buttons */}
-        <section className={`${styles.row} ${styles.actionsRow}`}>
-          <div className={styles.actionsGrid}>
-            <a className={`${styles.actionBtn} ${styles.actionPrimary}`} href="#patient-data">
-              Patient Data (how they see the world?)
-              <span className={styles.actionSub}>View examples + pattern categories</span>
-            </a>
-
-            <a className={`${styles.actionBtn} ${styles.actionGhost}`} href="#resources">
-              Resources to understand it better
-              <span className={styles.actionSub}>Guides, FAQs, clinician notes</span>
-            </a>
-
-            <a className={`${styles.actionBtn} ${styles.actionOutline}`} href="#api-access">
-              API request to access data
-              <span className={styles.actionSub}>Research + clinical integration</span>
-            </a>
+        {/* RIGHT COLUMN (SplitLanding-like styling) */}
+        <section className={styles.right}>
+          {/* Top card (like SplitLanding "Our Tools") */}
+          <div className={`${styles.topCard} card cardTitle`}>
+            <div className={styles.topCardTitle}>Clinical Tools</div>
+            <div className={styles.topCardSubtitle}>
+              Towards a more accepting and validating clinical and patient stories.
+            </div>
           </div>
+
+          {/* Center stack (button + description pairs) */}
+          <div className={styles.rightCenter}>
+            <div className={styles.actionStack} data-interactive="true">
+              <a
+                className={`${styles.actionBtn} ${styles.actionPrimary}`}
+                href="/sessions"
+              >
+                Patient Data (how they see the world?)
+              </a>
+              <p className={styles.toolDescription}>
+                View examples and pattern categories from patient-reported floater
+                appearances—turning subjective descriptions into consistent
+                referenceable visuals.
+              </p>
+
+              <a
+                className={`${styles.actionBtn} ${styles.actionGhost}`}
+                href="/resources"
+              >
+                🛠️  Resources to understand it better
+              </a>
+              <p className={styles.toolDescription}>
+                Practical guides, FAQs, and clinician-facing notes to help validate
+                symptoms, communicate uncertainty, and support patient trust.
+              </p>
+
+              <a
+                className={`${styles.actionBtn} ${styles.actionOutline}`}
+                href="#api-access"
+              >
+                🛠️  API request to access data
+              </a>
+              <p className={styles.toolDescription}>
+                For research and clinical integration—request structured access to
+                datasets and metadata that can support analysis and downstream tools.
+              </p>
+            </div>
+          </div>
+
+          
         </section>
-      </main>
+      </div>
     </div>
   );
 }
