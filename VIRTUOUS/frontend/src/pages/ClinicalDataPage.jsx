@@ -89,7 +89,7 @@ export default function ClinicalDataPage() {
 
               <a
                 className={`${styles.actionBtn} ${styles.actionGhost}`}
-                href="#resources"
+                href="/resources"
               >
                 Resources to understand it better
               </a>
