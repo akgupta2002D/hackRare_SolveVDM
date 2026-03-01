@@ -1,0 +1,142 @@
+[
+  {
+    "category": "symptoms",
+    "phrase": "floaters",
+    "count": 809
+  },
+  {
+    "category": "doctor_feedback",
+    "phrase": "diagnosis mentions",
+    "count": 205
+  },
+  {
+    "category": "daily_life_impact",
+    "phrase": "anxiety/distress",
+    "count": 141
+  },
+  {
+    "category": "symptoms",
+    "phrase": "eye floaters",
+    "count": 90
+  },
+  {
+    "category": "symptoms",
+    "phrase": "flashes",
+    "count": 86
+  },
+  {
+    "category": "doctor_feedback",
+    "phrase": "reassurance (nothing serious)",
+    "count": 67
+  },
+  {
+    "category": "daily_life_impact",
+    "phrase": "screen use impact",
+    "count": 63
+  },
+  {
+    "category": "daily_life_impact",
+    "phrase": "work impact",
+    "count": 54
+  },
+  {
+    "category": "doctor_feedback",
+    "phrase": "uncertainty/conflicting advice",
+    "count": 40
+  },
+  {
+    "category": "daily_life_impact",
+    "phrase": "outdoor/light avoidance",
+    "count": 38
+  },
+  {
+    "category": "symptoms",
+    "phrase": "retinal detachment concern",
+    "count": 37
+  },
+  {
+    "category": "symptoms",
+    "phrase": "visual snow",
+    "count": 34
+  },
+  {
+    "category": "symptoms",
+    "phrase": "eye pressure",
+    "count": 34
+  },
+  {
+    "category": "daily_life_impact",
+    "phrase": "sleep impact",
+    "count": 33
+  },
+  {
+    "category": "daily_life_impact",
+    "phrase": "reading impact",
+    "count": 25
+  },
+  {
+    "category": "symptoms",
+    "phrase": "eye pain",
+    "count": 23
+  },
+  {
+    "category": "daily_life_impact",
+    "phrase": "depression/hopelessness",
+    "count": 23
+  },
+  {
+    "category": "symptoms",
+    "phrase": "cobwebs/strings",
+    "count": 21
+  },
+  {
+    "category": "symptoms",
+    "phrase": "blurry vision",
+    "count": 21
+  },
+  {
+    "category": "doctor_feedback",
+    "phrase": "urgency warning",
+    "count": 19
+  },
+  {
+    "category": "daily_life_impact",
+    "phrase": "driving impact",
+    "count": 16
+  },
+  {
+    "category": "symptoms",
+    "phrase": "light sensitivity",
+    "count": 13
+  },
+  {
+    "category": "symptoms",
+    "phrase": "retinal tear concern",
+    "count": 11
+  },
+  {
+    "category": "daily_life_impact",
+    "phrase": "quality of life impact",
+    "count": 10
+  },
+  {
+    "category": "symptoms",
+    "phrase": "black spots/dots",
+    "count": 9
+  },
+  {
+    "category": "recurring_patterns",
+    "phrase": "dismissed by clinician",
+    "count": 7
+  },
+  {
+    "category": "recurring_patterns",
+    "phrase": "fear vs advice mismatch",
+    "count": 6
+  },
+  {
+    "category": "symptoms",
+    "phrase": "haze/cloudy vision",
+    "count": 4
+  }
+]

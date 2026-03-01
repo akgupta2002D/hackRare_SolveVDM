@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./emulator.css";
 import emulatorQrCode from "./emulator_qr_code.svg";
+import SymptomWordGraph from "./SymptomWordGraph";
 
 const Emulator = () => {
   const navigate = useNavigate();
@@ -52,6 +53,8 @@ const Emulator = () => {
                 research and reference.
               </p>
             </div>
+
+            <SymptomWordGraph />
           </div>
         </section>
 
