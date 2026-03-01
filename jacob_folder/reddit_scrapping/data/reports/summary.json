@@ -1,0 +1,90 @@
+{
+  "thread_count": 71,
+  "comment_count": 1222,
+  "severity_counts": {
+    "low": 1138,
+    "high": 24,
+    "moderate": 122,
+    "extreme": 9
+  },
+  "sentiment_counts": {
+    "mixed": 578,
+    "negative": 241,
+    "positive": 474
+  },
+  "top_lifestyle_impacts": [
+    [
+      "hobbies",
+      219
+    ],
+    [
+      "work",
+      85
+    ],
+    [
+      "reading",
+      78
+    ],
+    [
+      "outdoors",
+      78
+    ],
+    [
+      "screen_time",
+      73
+    ],
+    [
+      "mental_health",
+      67
+    ],
+    [
+      "sleep",
+      64
+    ],
+    [
+      "driving",
+      31
+    ]
+  ],
+  "top_medical_flags": [
+    [
+      "pvd",
+      87
+    ],
+    [
+      "flashes",
+      74
+    ],
+    [
+      "vitrectomy",
+      52
+    ],
+    [
+      "retinal_detachment",
+      32
+    ],
+    [
+      "laser",
+      31
+    ],
+    [
+      "retinal_tear",
+      21
+    ],
+    [
+      "yag",
+      12
+    ]
+  ],
+  "quote_category_counts": {
+    "help_seeking": 470,
+    "emotional_testimony": 66,
+    "general_experience": 606,
+    "coping_advice": 88,
+    "medical_experience": 63
+  },
+  "age_mentions_count": 37,
+  "average_age_mention": 35.11,
+  "theme_count": 6,
+  "quote_count": 12
+}
