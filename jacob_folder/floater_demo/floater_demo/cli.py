@@ -7,7 +7,7 @@ import typer
 from rich.console import Console
 
 from .config import load_config
-from .infer import infer_image
+from .infer import build_expo_payload, infer_image
 from .synth import generate_synth_dataset
 from .utils import ensure_dir
 from .visualize import save_debug_masks, save_overlay
@@ -41,6 +41,9 @@ def synth(
 def _finalize_and_print(result: dict[str, object], outdir: Path, debug_masks: bool) -> None:
     outdir_path = ensure_dir(outdir)
     overlay_path = save_overlay(result, outdir_path)
+    result_path = outdir_path / "result.json"
+    expo_result_path = outdir_path / "expo_result.json"
+    expo_payload = build_expo_payload(result)
 
     if debug_masks:
         save_debug_masks(result, outdir_path)
@@ -48,13 +51,18 @@ def _finalize_and_print(result: dict[str, object], outdir: Path, debug_masks: bo
     serializable = {
         "image": result["image"],
         "summary": result["summary"],
+        "expo": result["expo"],
         "instances": [_instance_payload(instance) for instance in result["instances"]],
         "artifacts": {
-            "overlay": str(overlay_path),
+            "overlay": overlay_path.name,
+            "result": result_path.name,
+            "expo_result": expo_result_path.name,
         },
     }
-    with (outdir_path / "result.json").open("w", encoding="utf-8") as handle:
+    with result_path.open("w", encoding="utf-8") as handle:
         json.dump(serializable, handle, indent=2)
+    with expo_result_path.open("w", encoding="utf-8") as handle:
+        json.dump(expo_payload, handle, indent=2)
     console.print_json(data=serializable)
 
 
@@ -62,6 +70,9 @@ def _instance_payload(instance: dict[str, object]) -> dict[str, object]:
     return {
         "id": instance["id"],
         "bbox": instance["bbox"],
+        "bbox_normalized": instance["bbox_normalized"],
+        "contour": instance["contour"],
+        "contour_normalized": instance["contour_normalized"],
         "area": instance["area"],
         "features": instance["features"],
         "label": instance["label"],

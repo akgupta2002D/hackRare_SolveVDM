@@ -8,6 +8,7 @@ from .features import compute_features
 from .preprocess import preprocess_image
 from .rules import classify_instance
 from .segment import segment_instances
+from .utils import mask_to_contour, normalize_bbox, normalize_contour
 
 
 def infer_image(
@@ -17,15 +18,22 @@ def infer_image(
 ) -> dict[str, object]:
     pre = preprocess_image(png_path, config.preprocess)
     components = segment_instances(pre.binary_mask, config.segment)
+    image_width = int(pre.original_bgr.shape[1])
+    image_height = int(pre.original_bgr.shape[0])
 
     instances: list[dict[str, object]] = []
     for component in components:
         features = compute_features(pre.grayscale, component)
         prediction = classify_instance(features, config.rules)
+        bbox = list(component.bbox)
+        contour = mask_to_contour(component.mask)
         instances.append(
             {
                 "id": component.id,
-                "bbox": list(component.bbox),
+                "bbox": bbox,
+                "bbox_normalized": normalize_bbox(bbox, image_width, image_height),
+                "contour": contour,
+                "contour_normalized": normalize_contour(contour, image_width, image_height),
                 "area": component.area,
                 "features": _serialize_features(asdict(features)),
                 "label": prediction.label,
@@ -38,12 +46,30 @@ def infer_image(
     return {
         "image": {
             "path": str(png_path),
-            "width": int(pre.original_bgr.shape[1]),
-            "height": int(pre.original_bgr.shape[0]),
+            "width": image_width,
+            "height": image_height,
         },
         "summary": {
             "instance_count": len(instances),
             "counts": _count_labels(instances),
+        },
+        "expo": {
+            "canvas": {
+                "width": image_width,
+                "height": image_height,
+            },
+            "instances": [
+                {
+                    "id": instance["id"],
+                    "label": instance["label"],
+                    "confidence": instance["confidence"],
+                    "bbox": instance["bbox"],
+                    "bbox_normalized": instance["bbox_normalized"],
+                    "contour": instance["contour"],
+                    "contour_normalized": instance["contour_normalized"],
+                }
+                for instance in instances
+            ],
         },
         "instances": instances,
         "debug": {
@@ -53,6 +79,29 @@ def infer_image(
             "original_bgr": pre.original_bgr,
             "binary_mask": pre.binary_mask,
         },
+    }
+
+
+def build_expo_payload(result: dict[str, object]) -> dict[str, object]:
+    return {
+        "schema_version": 1,
+        "image": {
+            "width": result["image"]["width"],
+            "height": result["image"]["height"],
+        },
+        "summary": result["summary"],
+        "instances": [
+            {
+                "id": instance["id"],
+                "label": instance["label"],
+                "confidence": instance["confidence"],
+                "bbox": instance["bbox"],
+                "bbox_normalized": instance["bbox_normalized"],
+                "contour": instance["contour"],
+                "contour_normalized": instance["contour_normalized"],
+            }
+            for instance in result["instances"]
+        ],
     }
 
 

@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 from pathlib import Path
+import json
 
 import cv2
 import numpy as np
 
+from floater_demo.cli import _finalize_and_print
 from floater_demo.config import load_config
 from floater_demo.infer import infer_image
 
@@ -27,3 +29,18 @@ def test_smoke(tmp_path: Path) -> None:
     assert "strands" in labels
     assert "rings" in labels
     assert "membranes" in labels
+    assert "expo" in result
+    assert len(result["expo"]["instances"]) == result["summary"]["instance_count"]
+    for instance in result["instances"]:
+        assert len(instance["bbox_normalized"]) == 4
+        assert isinstance(instance["contour"], list)
+
+    outdir = tmp_path / "out"
+    _finalize_and_print(result, outdir, debug_masks=False)
+    expo_path = outdir / "expo_result.json"
+    assert expo_path.exists()
+    with expo_path.open("r", encoding="utf-8") as handle:
+        expo_payload = json.load(handle)
+    assert expo_payload["schema_version"] == 1
+    assert len(expo_payload["instances"]) == result["summary"]["instance_count"]
+    assert "features" not in expo_payload["instances"][0]
