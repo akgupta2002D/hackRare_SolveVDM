@@ -134,9 +134,9 @@
   color: var(--text);
   cursor: pointer;
   transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
-  width: 100%;
-  max-width: 360px;
 }
+
+
 
 .virtuousNavBtn {
   border-radius: var(--r-md);
@@ -161,8 +161,16 @@
 
 /* Primary = accent-driven */
 .virtuousBtnPrimary {
-  border-color: var(--primary);
+  border-color: var(--navy-2);
 }
+
+.blue_border{
+    border-color: var(--navy-2);
+}
+.red_border{
+    border-color: var(--red-2);
+}
+
 
 .virtuousBtnPrimary:hover {
   border-color: var(--primary);
@@ -316,4 +324,22 @@
 .virtuousStatementGreen {
   background: var(--green);
   border-color: rgba(255,255,255,0.12);
+}
+
+.virtuousToolDescription {
+  font-size: 0.85rem;              /* smaller but readable */
+  line-height: 1.5;
+  max-width: 420px;
+  margin: 8px 0 20px 0;
+
+  color: rgba(255, 255, 255, 0.72); /* softened white for dark UI */
+  
+  letter-spacing: 0.2px;
+  font-weight: 400;
+
+  transition: opacity 0.2s ease;
+}
+
+.virtuousToolDescription:hover {
+  opacity: 0.9; /* subtle clarity on hover */
 }

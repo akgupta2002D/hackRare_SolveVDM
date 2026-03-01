@@ -46,11 +46,15 @@ export default function SplitLanding({ msg }) {
 
           <div className="virtuousRightCenter">
             <div className="virtuousButtonRow noFloatersEffect" data-interactive="true">
-              <button className="virtuousBtn virtuousBtnPrimary" onClick={() => navigate("/emulator")}>Patient: Emulator</button>
-              <button className="virtuousBtn virtuousBtnSecondary">Clinicians: Info and Data</button>
-              <button className="virtuousBtn virtuousBtnPrimary" onClick={() => navigate("/floaters")}>
+              <button className="blue_border virtuousBtn   " onClick={() => navigate("/emulator")}>Patient: Emulator</button>
+              <p className="virtuousToolDescription">An interactive emulator that lets you draw and simulate your eye floaters—bringing to life what standard scans often fail to capture.
+Track, visualize, and share your experience in real time, turning something invisible and isolating into something seen, understood, and validated.</p>
+              <button className="red_border virtuousBtn   ">Clinicians: Info and Data</button>
+              <p className="virtuousToolDescription">A clinician-and-researcher platform that converts patient drawings into standardized, classified datasets—building a growing database of floater patterns over time.
+By pairing user-reported visuals with optical modeling, we aim to turn subjective symptoms into shareable data for clinical insight and future research.</p>
+              {/* <button className="virtuousBtn " onClick={() => navigate("/floaters")}>
                 HeatMap
-            </button>
+            </button> */}
 
             </div>
 
