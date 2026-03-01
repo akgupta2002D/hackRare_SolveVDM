@@ -172,8 +172,80 @@
 }
 
 .cardTitle {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  margin-top: 5%;
   border-radius: var(--r-lg);
   box-shadow: var(--shadow);
+}
+
+.virtuousLeft {
+  position: relative;
+  overflow: hidden;
+}
+
+.virtuousLeftInner {
+  padding-top: calc(var(--s-6) + 56px);
+}
+
+.virtuousLeftNav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  padding: var(--s-3) var(--s-6);
+  z-index: 10;
+
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 65%, transparent);
+}
+
+.virtuousLeftNavInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.virtuousLeftNavBrand {
+  font-family: var(--font-sans);
+  letter-spacing: 0.14em;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.virtuousLeftNavActions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.virtuousNavBtn {
+  padding: 9px 12px;
+  font-size: var(--text-xs);
+  border-radius: var(--r-md);
+}
+
+.virtuousNavBtnEmergency {
+  border-color: var(--border-strong);
+  background: color-mix(in srgb, var(--surface-2) 80%, transparent);
+}
+
+.virtuousNavBtnPrimary {
+  border-color: var(--primary);
+}
+
+@media (max-width: 900px) {
+  .virtuousLeftInner {
+    padding-top: calc(var(--s-6) + 72px);
+  }
+
+  .virtuousLeftNav {
+    padding: var(--s-3) var(--s-4);
+  }
 }
