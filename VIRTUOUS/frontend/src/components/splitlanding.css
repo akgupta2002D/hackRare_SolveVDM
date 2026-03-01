@@ -1,0 +1,179 @@
+.virtuousPage {
+  min-height: 100vh;
+}
+
+.virtuousSplit {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+
+/* LEFT 65% */
+.virtuousLeft {
+  display: flex;
+  align-items: center;
+  padding: var(--s-6);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+
+.virtuousLeftInner {
+  width: 100%;
+  max-width: 720px;
+}
+
+.virtuousBrand {
+  margin: 0;
+  font-size: clamp(42px, 4vw, 56px);
+  line-height: var(--lh-tight);
+  letter-spacing: 0.08em;
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+.virtuousMission {
+  margin-top: var(--s-3);
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: var(--text-md);
+  line-height: var(--lh-relaxed);
+  max-width: 52ch;
+}
+
+.virtuousSpacer {
+  height: var(--s-6);
+}
+
+.virtuousStatus {
+  padding: var(--s-4);
+}
+
+.virtuousStatusLabel {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted-2);
+  margin-bottom: var(--s-2);
+}
+
+.virtuousPre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--lh-normal);
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* RIGHT 35% — IMPORTANT: transparent so floaters are visible */
+.virtuousRight {
+  position: relative;
+  padding: var(--s-6);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+
+  /* ✅ Allows floaters (behind) to be visible */
+  background: transparent;
+}
+
+/* Top content uses token surface via existing .card class */
+.virtuousTopCard {
+  padding: var(--s-4);
+  text-align: center;
+}
+
+.virtuousRightTitle {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  color: var(--text);
+  background: transparent;
+}
+
+.virtuousRightSubtitle {
+  margin-top: var(--s-2);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+/* Center actions */
+.virtuousRightCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.virtuousButtonRow {
+  display: flex;
+  gap: var(--s-3);
+  align-items: center;
+  justify-content: center;
+}
+
+/* Buttons — only tokens */
+.virtuousBtn {
+  border-radius: var(--r-md);
+  padding: 12px 18px;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 650;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+
+.virtuousBtn:hover {
+  background: var(--surface-3);
+}
+
+.virtuousBtn:active {
+  transform: translateY(1px);
+}
+
+/* Primary = accent-driven */
+.virtuousBtnPrimary {
+  border-color: var(--primary);
+}
+
+.virtuousBtnPrimary:hover {
+  border-color: var(--primary);
+}
+
+/* Secondary (default) */
+.virtuousBtnSecondary {
+  border-color: var(--border-strong);
+}
+
+/* Bottom-right */
+.virtuousRightBottom {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-bottom: var(--s-2);
+}
+
+.virtuousBtnCorner {
+  background: var(--surface);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .virtuousSplit {
+    grid-template-columns: 1fr;
+  }
+
+  .virtuousLeft {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+.cardTitle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow);
+}
