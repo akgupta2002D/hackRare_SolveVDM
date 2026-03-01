@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "drawing_id": "3d821b8e-c218-4f29-8f8f-df7ed503b23b",
-  "drawing_name": "V2",
+  "drawing_name": "June 22",
   "created_at": "2026-03-01T03:43:18.50224+00:00",
   "present_types": [
-    "membranes",
+    "dots",
     "strands"
   ],
   "counts": {
-    "dots": 0,
+    "dots": 1,
     "strands": 2,
-    "membranes": 1,
+    "membranes": 0,
     "rings": 0
   },
   "instance_count": 3,
@@ -23,9 +23,9 @@
     "summary": {
       "instance_count": 3,
       "counts": {
-        "dots": 0,
+        "dots": 1,
         "strands": 2,
-        "membranes": 1,
+        "membranes": 0,
         "rings": 0
       }
     },
@@ -33,7 +33,7 @@
       {
         "id": 1,
         "label": "strands",
-        "confidence": 0.798,
+        "confidence": 0.769,
         "bbox": [
           167,
           43,
@@ -11501,8 +11501,8 @@
       },
       {
         "id": 2,
-        "label": "membranes",
-        "confidence": 0.588,
+        "label": "dots",
+        "confidence": 0.8,
         "bbox": [
           573,
           77,
@@ -11651,7 +11651,7 @@
       {
         "id": 3,
         "label": "strands",
-        "confidence": 0.798,
+        "confidence": 0.822,
         "bbox": [
           38,
           159,

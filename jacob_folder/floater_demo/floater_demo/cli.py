@@ -86,12 +86,11 @@ def listen_supabase(
 @app.command("closed-loop")
 def closed_loop_command(
     outdir: Path = typer.Option(..., help="Directory for closed-loop artifacts."),
-    rounds: int = typer.Option(5, min=1, help="Maximum closed-loop rounds."),
+    rounds: int = typer.Option(1, min=1, help="Number of benchmark rounds."),
     seed: int = typer.Option(42, help="Base seed for deterministic generation."),
-    n: int = typer.Option(50, min=1, help="Samples per suite per round."),
-    apply_updates: bool = typer.Option(False, help="Apply bounded config updates between rounds."),
+    n: int = typer.Option(100, min=1, help="Samples per class per round."),
 ) -> None:
-    payload = run_closed_loop(outdir=outdir, rounds=rounds, seed=seed, n_per_suite=n, apply_updates=apply_updates)
+    payload = run_closed_loop(outdir=outdir, rounds=rounds, seed=seed, n_per_suite=n)
     console.print_json(data=payload)
 
 

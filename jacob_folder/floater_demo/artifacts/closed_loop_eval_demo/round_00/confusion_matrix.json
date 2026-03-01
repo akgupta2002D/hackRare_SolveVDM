@@ -1,0 +1,102 @@
+{
+  "labels": [
+    "dots",
+    "strands",
+    "membranes",
+    "rings"
+  ],
+  "counts": {
+    "dots": {
+      "dots": 100,
+      "strands": 0,
+      "membranes": 0,
+      "rings": 0
+    },
+    "strands": {
+      "dots": 0,
+      "strands": 96,
+      "membranes": 4,
+      "rings": 0
+    },
+    "membranes": {
+      "dots": 0,
+      "strands": 9,
+      "membranes": 86,
+      "rings": 5
+    },
+    "rings": {
+      "dots": 23,
+      "strands": 0,
+      "membranes": 70,
+      "rings": 7
+    }
+  },
+  "normalized": {
+    "dots": {
+      "dots": 1.0,
+      "strands": 0.0,
+      "membranes": 0.0,
+      "rings": 0.0
+    },
+    "strands": {
+      "dots": 0.0,
+      "strands": 0.96,
+      "membranes": 0.04,
+      "rings": 0.0
+    },
+    "membranes": {
+      "dots": 0.0,
+      "strands": 0.09,
+      "membranes": 0.86,
+      "rings": 0.05
+    },
+    "rings": {
+      "dots": 0.23,
+      "strands": 0.0,
+      "membranes": 0.7,
+      "rings": 0.07
+    }
+  },
+  "missed": {
+    "dots": 0,
+    "strands": 0,
+    "membranes": 0,
+    "rings": 0
+  },
+  "spurious": {
+    "dots": 0,
+    "strands": 0,
+    "membranes": 0,
+    "rings": 0
+  },
+  "row_support": {
+    "dots": 100,
+    "strands": 100,
+    "membranes": 100,
+    "rings": 100
+  },
+  "overall_accuracy": 0.7225,
+  "overall_support": 400,
+  "precision_recall": {
+    "dots": {
+      "precision": 0.813,
+      "recall": 1.0,
+      "support": 100
+    },
+    "strands": {
+      "precision": 0.9143,
+      "recall": 0.96,
+      "support": 100
+    },
+    "membranes": {
+      "precision": 0.5375,
+      "recall": 0.86,
+      "support": 100
+    },
+    "rings": {
+      "precision": 0.5833,
+      "recall": 0.07,
+      "support": 100
+    }
+  }
+}

@@ -22,6 +22,7 @@ class InstanceFeatures:
     perimeter: float
     circularity: float
     bbox_aspect_ratio: float
+    elongation: float
     solidity: float
     skeleton_length: float
     hole_count: int
@@ -59,6 +60,7 @@ def compute_features(
     hull = cv2.convexHull(contour)
     hull_area = float(cv2.contourArea(hull))
     solidity = float(area / (hull_area + EPS))
+    elongation = _pca_elongation(instance.mask)
 
     feature_mask = _smooth_mask(instance.mask)
     skeleton = skeletonize(feature_mask.astype(bool))
@@ -79,6 +81,7 @@ def compute_features(
         perimeter=perimeter,
         circularity=circularity,
         bbox_aspect_ratio=bbox_aspect_ratio,
+        elongation=elongation,
         solidity=solidity,
         skeleton_length=skeleton_length,
         hole_count=hole_stats["hole_count"],
@@ -191,6 +194,21 @@ def _distance_thickness_estimate(mask: np.ndarray) -> float:
     if positive.size == 0:
         return 0.0
     return float(2.0 * np.median(positive))
+
+
+def _pca_elongation(mask: np.ndarray) -> float:
+    ys, xs = np.where(mask > 0)
+    if xs.size < 3:
+        return 1.0
+    coords = np.column_stack((xs.astype(np.float32), ys.astype(np.float32)))
+    centered = coords - coords.mean(axis=0, keepdims=True)
+    covariance = np.cov(centered, rowvar=False)
+    eigenvalues = np.linalg.eigvalsh(covariance)
+    if eigenvalues.size != 2:
+        return 1.0
+    lambda1 = float(max(eigenvalues))
+    lambda2 = float(min(eigenvalues))
+    return float(np.sqrt(lambda1 / (lambda2 + EPS)))
 
 
 def save_feature_debug(

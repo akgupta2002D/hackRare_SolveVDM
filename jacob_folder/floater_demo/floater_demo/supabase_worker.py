@@ -162,23 +162,38 @@ class SupabaseWorker:
     def run_forever(self) -> None:
         while True:
             processed = self.run_once()
-            if not processed:
+            if processed == 0:
                 time.sleep(self.config.poll_interval_s)
 
-    def run_once(self) -> bool:
+    def run_once(self) -> int:
         self._maybe_reset_outputs()
-        rows = self.fetch_pending_rows(limit=10)
-        if not rows:
-            return False
-        for row in rows:
-            self.process_row(row)
-        return True
+        processed_count = 0
+        page_size = 10
 
-    def fetch_pending_rows(self, limit: int = 10) -> list[dict[str, Any]]:
+        if self.config.write_mode == "overwrite_all":
+            rows = self.fetch_pending_rows(limit=1000, offset=0)
+            for row in rows:
+                if self._safe_process_row(row):
+                    processed_count += 1
+            return processed_count
+
+        while True:
+            rows = self.fetch_pending_rows(limit=page_size)
+            if not rows:
+                break
+            for row in rows:
+                if self._safe_process_row(row):
+                    processed_count += 1
+            if len(rows) < page_size:
+                break
+        return processed_count
+
+    def fetch_pending_rows(self, limit: int = 10, offset: int = 0) -> list[dict[str, Any]]:
         params = {
             "select": "id,name,paths,canvas_width,canvas_height,image_url,created_at,analysed_at",
             "order": "created_at.asc",
             "limit": str(limit),
+            "offset": str(offset),
         }
         if self.config.write_mode == "incremental":
             params[self.config.analysed_at_column] = "is.null"
@@ -193,6 +208,24 @@ class SupabaseWorker:
         if not isinstance(payload, list):
             raise RuntimeError("Supabase response was not a list")
         return payload
+
+    def _safe_process_row(self, row: dict[str, Any]) -> bool:
+        row_id = str(row.get("id", "unknown"))
+        try:
+            self.process_row(row)
+            return True
+        except Exception as exc:
+            error_dir = ensure_dir(self.artifacts_dir / "_errors")
+            error_path = error_dir / f"{row_id}.json"
+            error_payload = {
+                "row_id": row_id,
+                "error_type": type(exc).__name__,
+                "error": str(exc),
+                "row": row,
+                "timestamp": utc_now_iso(),
+            }
+            error_path.write_text(json.dumps(error_payload, indent=2), encoding="utf-8")
+            return False
 
     def _maybe_reset_outputs(self) -> None:
         if self._startup_reset_completed:
@@ -262,6 +295,7 @@ class SupabaseWorker:
             temp_dir_path = Path(temp_dir)
             image_path = self._prepare_input_image(row, temp_dir_path)
             result = infer_image(image_path, self.demo_config, save_debug_masks=True)
+            result = apply_vector_priors(result, row)
             expo_payload = build_expo_payload(result)
 
             row_artifacts_dir = ensure_dir(self.artifacts_dir / row_id)
@@ -560,6 +594,186 @@ def parse_svg_points(path_d: str) -> list[tuple[float, float]]:
         points.append((x, y))
         idx += 2
     return points
+
+
+def apply_vector_priors(result: dict[str, Any], row: dict[str, Any]) -> dict[str, Any]:
+    path_priors = build_path_priors(row.get("paths") or [])
+    if not path_priors:
+        return result
+
+    updated_instances: list[dict[str, Any]] = []
+    for instance in result["instances"]:
+        adjusted = dict(instance)
+        matched_prior = match_instance_to_path_prior(adjusted["bbox"], path_priors)
+        if matched_prior is not None:
+            adjusted = apply_path_prior_to_instance(adjusted, matched_prior)
+        updated_instances.append(adjusted)
+
+    summary_counts = {"dots": 0, "strands": 0, "membranes": 0, "rings": 0}
+    for instance in updated_instances:
+        summary_counts[str(instance["label"])] += 1
+
+    updated_result = dict(result)
+    updated_result["instances"] = updated_instances
+    updated_result["summary"] = {
+        **result["summary"],
+        "counts": summary_counts,
+        "instance_count": len(updated_instances),
+    }
+    updated_result["expo"] = {
+        "canvas": dict(result["expo"]["canvas"]),
+        "instances": [
+            {
+                "id": instance["id"],
+                "label": instance["label"],
+                "confidence": instance["confidence"],
+                "bbox": instance["bbox"],
+                "bbox_normalized": instance["bbox_normalized"],
+                "contour": instance["contour"],
+                "contour_normalized": instance["contour_normalized"],
+            }
+            for instance in updated_instances
+        ],
+    }
+    return updated_result
+
+
+def build_path_priors(paths: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    priors: list[dict[str, Any]] = []
+    for index, path_entry in enumerate(paths, start=1):
+        points = parse_svg_points(str(path_entry.get("d") or ""))
+        if len(points) < 2:
+            continue
+        stroke_width = max(1.0, float(path_entry.get("strokeWidth") or 5.0))
+        bbox = path_bbox(points, stroke_width)
+        if bbox[2] <= 0 or bbox[3] <= 0:
+            continue
+        aspect_ratio = max(bbox[2], bbox[3]) / max(min(bbox[2], bbox[3]), 1)
+        endpoint_distance = float(np.hypot(points[-1][0] - points[0][0], points[-1][1] - points[0][1]))
+        loop_threshold = max(18.0, 0.2 * max(bbox[2], bbox[3]))
+        closed_like = endpoint_distance <= loop_threshold
+        bbox_area = bbox[2] * bbox[3]
+        priors.append(
+            {
+                "id": index,
+                "bbox": bbox,
+                "bbox_area": bbox_area,
+                "stroke_width": stroke_width,
+                "aspect_ratio": aspect_ratio,
+                "endpoint_distance": endpoint_distance,
+                "loop_threshold": loop_threshold,
+                "closed_like": closed_like,
+            }
+        )
+    return priors
+
+
+def match_instance_to_path_prior(
+    bbox: list[int] | tuple[int, int, int, int],
+    priors: list[dict[str, Any]],
+) -> dict[str, Any] | None:
+    best_prior: dict[str, Any] | None = None
+    best_score = -1.0
+    for prior in priors:
+        iou_score = bbox_iou_xywh(bbox, prior["bbox"])
+        center_score = bbox_center_proximity_score(bbox, prior["bbox"])
+        containment_bonus = 0.25 if bbox_center_inside(bbox, prior["bbox"]) else 0.0
+        score = iou_score + center_score + containment_bonus
+        if score > best_score:
+            best_score = score
+            best_prior = prior
+    if best_score < 0.2:
+        return None
+    return best_prior
+
+
+def apply_path_prior_to_instance(instance: dict[str, Any], prior: dict[str, Any]) -> dict[str, Any]:
+    adjusted = dict(instance)
+    label = str(adjusted["label"])
+    explanation = str(adjusted["explanation"])
+    stroke_width = float(prior["stroke_width"])
+    closed_like = bool(prior["closed_like"])
+    aspect_ratio = float(prior["aspect_ratio"])
+    bbox_area = float(prior["bbox_area"])
+
+    if closed_like and bbox_area <= 700.0 and stroke_width <= 6.0:
+        if label != "dots":
+            adjusted["label"] = "dots"
+            adjusted["confidence"] = max(0.8, float(adjusted["confidence"]))
+            adjusted["explanation"] = explanation + " Vector prior supported dot: matched a tiny closed stroke."
+        return adjusted
+
+    if label == "rings" and stroke_width >= 12.0 and not closed_like:
+        adjusted["label"] = "membranes"
+        adjusted["confidence"] = max(0.7, float(adjusted["confidence"]))
+        adjusted["explanation"] = explanation + " Vector prior vetoed ring: thick open stroke matched membrane-like path."
+        return adjusted
+
+    if label != "rings" and closed_like and stroke_width <= 8.0 and aspect_ratio <= 2.0 and bbox_area >= 1800.0:
+        adjusted["label"] = "rings"
+        adjusted["confidence"] = max(0.78, float(adjusted["confidence"]))
+        adjusted["explanation"] = explanation + " Vector prior supported ring: matched a closed loop stroke."
+        return adjusted
+
+    if label == "membranes" and stroke_width <= 6.0 and not closed_like and aspect_ratio >= 1.8:
+        adjusted["label"] = "strands"
+        adjusted["confidence"] = max(0.72, float(adjusted["confidence"]))
+        adjusted["explanation"] = explanation + " Vector prior supported strand: matched a thin open stroke."
+        return adjusted
+
+    return adjusted
+
+
+def path_bbox(points: list[tuple[float, float]], stroke_width: float) -> list[int]:
+    xs = [point[0] for point in points]
+    ys = [point[1] for point in points]
+    pad = max(2, int(round(stroke_width / 2.0 + 2)))
+    x0 = int(np.floor(min(xs))) - pad
+    y0 = int(np.floor(min(ys))) - pad
+    x1 = int(np.ceil(max(xs))) + pad
+    y1 = int(np.ceil(max(ys))) + pad
+    return [x0, y0, max(0, x1 - x0 + 1), max(0, y1 - y0 + 1)]
+
+
+def bbox_iou_xywh(
+    box_a: list[int] | tuple[int, int, int, int],
+    box_b: list[int] | tuple[int, int, int, int],
+) -> float:
+    ax, ay, aw, ah = box_a
+    bx, by, bw, bh = box_b
+    ax2, ay2 = ax + aw, ay + ah
+    bx2, by2 = bx + bw, by + bh
+    inter_w = max(0, min(ax2, bx2) - max(ax, bx))
+    inter_h = max(0, min(ay2, by2) - max(ay, by))
+    inter = inter_w * inter_h
+    union = aw * ah + bw * bh - inter
+    return float(inter / union) if union > 0 else 0.0
+
+
+def bbox_center_inside(
+    box_a: list[int] | tuple[int, int, int, int],
+    box_b: list[int] | tuple[int, int, int, int],
+) -> bool:
+    ax, ay, aw, ah = box_a
+    bx, by, bw, bh = box_b
+    cx = ax + aw / 2.0
+    cy = ay + ah / 2.0
+    return bx <= cx <= bx + bw and by <= cy <= by + bh
+
+
+def bbox_center_proximity_score(
+    box_a: list[int] | tuple[int, int, int, int],
+    box_b: list[int] | tuple[int, int, int, int],
+) -> float:
+    ax, ay, aw, ah = box_a
+    bx, by, bw, bh = box_b
+    acx = ax + aw / 2.0
+    acy = ay + ah / 2.0
+    bcx = bx + bw / 2.0
+    bcy = by + bh / 2.0
+    distance = float(np.hypot(acx - bcx, acy - bcy))
+    scale = max((aw + bw) / 2.0, (ah + bh) / 2.0, 1.0)
+    return max(0.0, 1.0 - distance / (scale * 2.0))
 
 
 def utc_now_iso() -> str:

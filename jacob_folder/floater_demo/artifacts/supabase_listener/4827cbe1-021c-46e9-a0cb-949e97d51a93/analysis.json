@@ -1,22 +1,23 @@
 {
   "schema_version": 1,
   "drawing_id": "4827cbe1-021c-46e9-a0cb-949e97d51a93",
-  "drawing_name": "Ghgf",
-  "analysed_at": "2026-03-01T16:46:03.098562+00:00",
+  "drawing_name": "July 3",
+  "analysed_at": "2026-03-01T17:39:11.688958+00:00",
   "present_types": [
+    "membranes",
     "strands"
   ],
   "summary": {
     "instance_count": 2,
     "counts": {
       "dots": 0,
-      "strands": 2,
-      "membranes": 0,
+      "strands": 1,
+      "membranes": 1,
       "rings": 0
     }
   },
   "image": {
-    "path": "/var/folders/mk/dw5zszgn6710dxx0shrh68zr0000gn/T/floater_4827cbe1-021c-46e9-a0cb-949e97d51a93_jdonwi96/rendered.png",
+    "path": "/var/folders/mk/dw5zszgn6710dxx0shrh68zr0000gn/T/floater_4827cbe1-021c-46e9-a0cb-949e97d51a93_2ttx0xb_/rendered.png",
     "width": 404,
     "height": 711
   },
@@ -30,8 +31,8 @@
       "instance_count": 2,
       "counts": {
         "dots": 0,
-        "strands": 2,
-        "membranes": 0,
+        "strands": 1,
+        "membranes": 1,
         "rings": 0
       }
     },
@@ -39,7 +40,7 @@
       {
         "id": 1,
         "label": "strands",
-        "confidence": 0.775,
+        "confidence": 0.9,
         "bbox": [
           308,
           206,
@@ -1171,8 +1172,8 @@
       },
       {
         "id": 2,
-        "label": "strands",
-        "confidence": 0.781,
+        "label": "membranes",
+        "confidence": 0.8,
         "bbox": [
           97,
           240,
@@ -8780,7 +8781,7 @@
     {
       "id": 1,
       "label": "strands",
-      "confidence": 0.775,
+      "confidence": 0.9,
       "bbox": [
         308,
         206,
@@ -9914,6 +9915,7 @@
         "perimeter": 1169.0366,
         "circularity": 0.0469,
         "bbox_aspect_ratio": 6.6122,
+        "elongation": 5.9148,
         "solidity": 0.4588,
         "skeleton_length": 540.0,
         "hole_count": 0,
@@ -9922,12 +9924,12 @@
         "annularity_ratio": 0.0,
         "thickness_est": 6.0
       },
-      "explanation": "Long thin low-circularity component matched strand rule."
+      "explanation": "Elongated component matched strand rule."
     },
     {
       "id": 2,
-      "label": "strands",
-      "confidence": 0.781,
+      "label": "membranes",
+      "confidence": 0.8,
       "bbox": [
         97,
         240,
@@ -17533,6 +17535,7 @@
         "perimeter": 2389.9596,
         "circularity": 0.0219,
         "bbox_aspect_ratio": 1.6429,
+        "elongation": 1.6045,
         "solidity": 0.2287,
         "skeleton_length": 1052.0,
         "hole_count": 0,
@@ -17541,7 +17544,7 @@
         "annularity_ratio": 0.0,
         "thickness_est": 5.6
       },
-      "explanation": "Long thin low-circularity component matched strand rule."
+      "explanation": "Large compact region matched membrane rule."
     }
   ]
 }

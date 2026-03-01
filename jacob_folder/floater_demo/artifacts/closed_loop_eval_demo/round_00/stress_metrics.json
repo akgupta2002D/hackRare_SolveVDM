@@ -1,0 +1,12 @@
+{
+  "overlap_strands": {
+    "matched_accuracy": 0.9026,
+    "detection_ratio": 0.8933,
+    "gt_instances": 300,
+    "pred_instances": 268
+  },
+  "small_ring_overlap": {
+    "ring_recall": 0.0,
+    "ring_gt_instances": 100
+  }
+}

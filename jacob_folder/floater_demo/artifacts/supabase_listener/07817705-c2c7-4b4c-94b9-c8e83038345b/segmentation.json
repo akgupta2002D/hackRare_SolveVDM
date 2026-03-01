@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "drawing_id": "07817705-c2c7-4b4c-94b9-c8e83038345b",
-  "drawing_name": "A1",
+  "drawing_name": "January 15",
   "created_at": "2026-03-01T04:38:55.773226+00:00",
   "present_types": [
-    "rings"
+    "membranes"
   ],
   "counts": {
     "dots": 0,
     "strands": 0,
-    "membranes": 0,
-    "rings": 1
+    "membranes": 1,
+    "rings": 0
   },
   "instance_count": 1,
   "expo": {
@@ -24,15 +24,15 @@
       "counts": {
         "dots": 0,
         "strands": 0,
-        "membranes": 0,
-        "rings": 1
+        "membranes": 1,
+        "rings": 0
       }
     },
     "instances": [
       {
         "id": 1,
-        "label": "rings",
-        "confidence": 0.9,
+        "label": "membranes",
+        "confidence": 0.819,
         "bbox": [
           217,
           427,

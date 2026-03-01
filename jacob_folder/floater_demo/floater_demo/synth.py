@@ -25,6 +25,7 @@ ADVERSARIAL_SUITES = (
     "broken_ring_gap_large",
 )
 CLOSED_LOOP_SUITES = (
+    "true_dot_clean",
     "thick_strand_long",
     "dense_scribble_merge",
     "crossing_strands_pocket_hole",
@@ -427,6 +428,8 @@ def generate_closed_loop_case(
 
     if suite_name == "dense_scribble_merge":
         image, instances, meta = _generate_dense_scribble_merge(rng, width, height)
+    elif suite_name == "true_dot_clean":
+        image, instances, meta = _generate_true_dot_clean(rng, width, height)
     elif suite_name == "true_ring_clean":
         image, instances, meta = _generate_true_ring_clean(rng, width, height)
     elif suite_name == "true_strand_thin":
@@ -505,6 +508,31 @@ def _generate_true_ring_clean(
         layer=image_gray,
     )
     meta = {"suite_name": "true_ring_clean", "expected_label": "rings", "gt_instances": 1}
+    return cv2.cvtColor(image_gray, cv2.COLOR_GRAY2BGR), [instance], meta
+
+
+def _generate_true_dot_clean(
+    rng: np.random.Generator,
+    width: int,
+    height: int,
+) -> tuple[np.ndarray, list[SyntheticInstance], dict[str, object]]:
+    temp = np.full((height, width), 255, dtype=np.uint8)
+    mask = np.zeros((height, width), dtype=np.uint8)
+    center = (width // 2 + int(rng.integers(-20, 20)), height // 2 + int(rng.integers(-20, 20)))
+    radius = int(rng.integers(12, 19))
+    intensity = int(rng.integers(104, 132))
+    cv2.circle(temp, center, radius, intensity, -1, lineType=cv2.LINE_AA)
+    cv2.circle(mask, center, radius, 255, -1, lineType=cv2.LINE_AA)
+    image_gray = cv2.GaussianBlur(temp, (0, 0), sigmaX=1.05, sigmaY=1.05)
+    instance = SyntheticInstance(
+        id=1,
+        label="dots",
+        mask=mask,
+        bbox=mask_to_bbox(mask),
+        contour=_largest_contour(mask),
+        layer=image_gray,
+    )
+    meta = {"suite_name": "true_dot_clean", "expected_label": "dots", "gt_instances": 1}
     return cv2.cvtColor(image_gray, cv2.COLOR_GRAY2BGR), [instance], meta
 
 
@@ -618,19 +646,12 @@ def _generate_membrane_cloud_faint(
 ) -> tuple[np.ndarray, list[SyntheticInstance], dict[str, object]]:
     temp = np.full((height, width), 255, dtype=np.uint8)
     mask = np.zeros((height, width), dtype=np.uint8)
-    center = np.array([width // 2, height // 2], dtype=np.float32)
-    for _ in range(int(rng.integers(5, 8))):
-        axes = (int(rng.integers(24, 44)), int(rng.integers(16, 30)))
-        offset = rng.normal(0, 16, size=2)
-        local_center = (
-            int(np.clip(center[0] + offset[0], axes[0] + 8, width - axes[0] - 8)),
-            int(np.clip(center[1] + offset[1], axes[1] + 8, height - axes[1] - 8)),
-        )
-        angle = float(rng.uniform(0, 180))
-        cv2.ellipse(temp, local_center, axes, angle, 0, 360, int(rng.integers(158, 198)), -1, lineType=cv2.LINE_AA)
-        cv2.ellipse(mask, local_center, axes, angle, 0, 360, 255, -1, lineType=cv2.LINE_AA)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (11, 11)))
-    image_gray = cv2.GaussianBlur(temp, (0, 0), sigmaX=3.2, sigmaY=3.2)
+    center = (width // 2 + int(rng.integers(-16, 16)), height // 2 + int(rng.integers(-12, 12)))
+    axes = (int(rng.integers(42, 58)), int(rng.integers(20, 30)))
+    angle = float(rng.uniform(-24, 24))
+    cv2.ellipse(temp, center, axes, angle, 0, 360, int(rng.integers(108, 128)), -1, lineType=cv2.LINE_AA)
+    cv2.ellipse(mask, center, axes, angle, 0, 360, 255, -1, lineType=cv2.LINE_AA)
+    image_gray = cv2.GaussianBlur(temp, (0, 0), sigmaX=1.0, sigmaY=1.0)
     instance = SyntheticInstance(
         id=1,
         label="membranes",

@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
   "drawing_id": "07817705-c2c7-4b4c-94b9-c8e83038345b",
-  "drawing_name": "A1",
-  "analysed_at": "2026-03-01T15:29:32.491300+00:00",
+  "drawing_name": "January 15",
+  "analysed_at": "2026-03-01T17:39:31.894897+00:00",
   "present_types": [
-    "rings"
+    "membranes"
   ],
   "summary": {
     "instance_count": 1,
     "counts": {
       "dots": 0,
       "strands": 0,
-      "membranes": 0,
-      "rings": 1
+      "membranes": 1,
+      "rings": 0
     }
   },
   "image": {
-    "path": "/var/folders/mk/dw5zszgn6710dxx0shrh68zr0000gn/T/floater_07817705-c2c7-4b4c-94b9-c8e83038345b_zg1qj182/rendered.png",
+    "path": "/var/folders/mk/dw5zszgn6710dxx0shrh68zr0000gn/T/floater_07817705-c2c7-4b4c-94b9-c8e83038345b_hbz6ta7l/rendered.png",
     "width": 820,
     "height": 1032
   },
@@ -31,15 +31,15 @@
       "counts": {
         "dots": 0,
         "strands": 0,
-        "membranes": 0,
-        "rings": 1
+        "membranes": 1,
+        "rings": 0
       }
     },
     "instances": [
       {
         "id": 1,
-        "label": "rings",
-        "confidence": 0.9,
+        "label": "membranes",
+        "confidence": 0.819,
         "bbox": [
           217,
           427,
@@ -8110,8 +8110,8 @@
   "instances": [
     {
       "id": 1,
-      "label": "rings",
-      "confidence": 0.9,
+      "label": "membranes",
+      "confidence": 0.819,
       "bbox": [
         217,
         427,
@@ -16181,12 +16181,16 @@
         "perimeter": 3245.3578,
         "circularity": 0.0164,
         "bbox_aspect_ratio": 1.5217,
+        "elongation": 1.2105,
         "solidity": 0.0893,
-        "skeleton_length": 1470.0,
+        "skeleton_length": 1461.0,
         "hole_count": 1,
-        "thickness_est": 9.3286
+        "max_hole_area_ratio": 0.2043,
+        "hole_area_total_ratio": 0.2043,
+        "annularity_ratio": 0.1696,
+        "thickness_est": 4.3938
       },
-      "explanation": "Detected enclosed hole, matching ring shape."
+      "explanation": "Large compact region matched membrane rule."
     }
   ]
 }

@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
   "drawing_id": "35a1cb76-60a5-488a-b95a-7f4e690fbdd7",
-  "drawing_name": "Gvgvybubuh",
-  "analysed_at": "2026-03-01T16:46:15.600633+00:00",
+  "drawing_name": "April 22",
+  "analysed_at": "2026-03-01T17:39:23.693176+00:00",
   "present_types": [
-    "strands"
+    "membranes"
   ],
   "summary": {
     "instance_count": 1,
     "counts": {
       "dots": 0,
-      "strands": 1,
-      "membranes": 0,
+      "strands": 0,
+      "membranes": 1,
       "rings": 0
     }
   },
   "image": {
-    "path": "/var/folders/mk/dw5zszgn6710dxx0shrh68zr0000gn/T/floater_35a1cb76-60a5-488a-b95a-7f4e690fbdd7__cj7epvf/rendered.png",
+    "path": "/var/folders/mk/dw5zszgn6710dxx0shrh68zr0000gn/T/floater_35a1cb76-60a5-488a-b95a-7f4e690fbdd7_lnv_jpk2/rendered.png",
     "width": 820,
     "height": 1032
   },
@@ -30,16 +30,16 @@
       "instance_count": 1,
       "counts": {
         "dots": 0,
-        "strands": 1,
-        "membranes": 0,
+        "strands": 0,
+        "membranes": 1,
         "rings": 0
       }
     },
     "instances": [
       {
         "id": 1,
-        "label": "strands",
-        "confidence": 0.775,
+        "label": "membranes",
+        "confidence": 0.811,
         "bbox": [
           21,
           45,
@@ -24030,8 +24030,8 @@
   "instances": [
     {
       "id": 1,
-      "label": "strands",
-      "confidence": 0.775,
+      "label": "membranes",
+      "confidence": 0.811,
       "bbox": [
         21,
         45,
@@ -48021,6 +48021,7 @@
         "perimeter": 7012.1226,
         "circularity": 0.04,
         "bbox_aspect_ratio": 1.2371,
+        "elongation": 1.3792,
         "solidity": 0.2414,
         "skeleton_length": 14365.0,
         "hole_count": 85,
@@ -48029,7 +48030,7 @@
         "annularity_ratio": 0.6871,
         "thickness_est": 6.0
       },
-      "explanation": "Long thin low-circularity component matched strand rule."
+      "explanation": "Large compact region matched membrane rule."
     }
   ]
 }

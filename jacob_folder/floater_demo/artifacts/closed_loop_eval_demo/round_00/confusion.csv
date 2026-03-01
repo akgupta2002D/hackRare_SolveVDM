@@ -1,0 +1,6 @@
+gt_label,dots,strands,membranes,rings,missed,support
+dots,100,0,0,0,0,100
+strands,0,96,4,0,0,100
+membranes,0,9,86,5,0,100
+rings,23,0,70,7,0,100
+spurious,0,0,0,0,,

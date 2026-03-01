@@ -1,15 +1,16 @@
 {
   "schema_version": 1,
   "drawing_id": "edc9b352-ec78-4b8d-9fd2-93637b21b306",
-  "drawing_name": "Chig",
+  "drawing_name": "Dec 24",
   "created_at": "2026-03-01T02:07:33.749174+00:00",
   "present_types": [
+    "membranes",
     "strands"
   ],
   "counts": {
     "dots": 0,
-    "strands": 3,
-    "membranes": 0,
+    "strands": 2,
+    "membranes": 1,
     "rings": 0
   },
   "instance_count": 3,
@@ -23,8 +24,8 @@
       "instance_count": 3,
       "counts": {
         "dots": 0,
-        "strands": 3,
-        "membranes": 0,
+        "strands": 2,
+        "membranes": 1,
         "rings": 0
       }
     },
@@ -32,7 +33,7 @@
       {
         "id": 1,
         "label": "strands",
-        "confidence": 0.798,
+        "confidence": 0.871,
         "bbox": [
           198,
           27,
@@ -1444,8 +1445,8 @@
       },
       {
         "id": 2,
-        "label": "strands",
-        "confidence": 0.798,
+        "label": "membranes",
+        "confidence": 0.796,
         "bbox": [
           97,
           326,
@@ -6314,7 +6315,7 @@
       {
         "id": 3,
         "label": "strands",
-        "confidence": 0.798,
+        "confidence": 0.9,
         "bbox": [
           143,
           469,

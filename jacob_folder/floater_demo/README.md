@@ -23,13 +23,7 @@ Generate synthetic data
 python -m floater_demo.cli synth --outdir artifacts/synth --n 20 --seed 42
 ```
 
-Run the closed-loop failure harness
-
-```bash
-python -m floater_demo.closed_loop --outdir artifacts/closed_loop --rounds 5 --seed 42 --n 50 --apply-updates
-```
-
-For a presentation-ready benchmark with a larger and more diverse synthetic stress set:
+Run the balanced benchmark
 
 ```bash
 python -m floater_demo.closed_loop --outdir artifacts/closed_loop_eval --rounds 1 --seed 42 --n 100
@@ -38,9 +32,17 @@ python -m floater_demo.closed_loop --outdir artifacts/closed_loop_eval --rounds 
 This writes:
 - `report.json`
 - `confusion.csv`
+- `confusion_row_normalized.csv`
 - `confusion_matrix.json`
 - `confusion_matrix.png`
 - `presentation_metrics.json`
+- `stress_metrics.json`
+
+The benchmark is balanced by design:
+- equal synthetic support for `dots`, `strands`, `membranes`, and `rings`
+- one harder reference suite per class
+- `confusion_matrix.png` is row-normalized for presentation, so each ground-truth row sums to 100%
+- `stress_metrics.json` reports extra overlap-sensitive checks outside the main matrix
 
 ## Synthetic Data
 
