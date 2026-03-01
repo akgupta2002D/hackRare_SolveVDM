@@ -1,0 +1,6 @@
+requests
+typer
+rich
+scikit-learn
+vaderSentiment
+pytest

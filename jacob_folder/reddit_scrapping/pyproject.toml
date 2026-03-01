@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reddit-scrapping"
+version = "0.1.0"
+description = "Reddit research pipeline for eye floater discussions."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "requests",
+  "typer",
+  "rich",
+  "scikit-learn",
+  "vaderSentiment",
+  "pytest",
+]
+
+[project.scripts]
+reddit-scrapping = "reddit_scrapping.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["reddit_scrapping*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
