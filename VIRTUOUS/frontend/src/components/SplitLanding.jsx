@@ -1,12 +1,18 @@
 import React from "react";
 import "./splitLanding.css";
+import VirtuousLeftNav from "./VirtuousLeftNav";
+import { useNavigate } from "react-router-dom";
 
 export default function SplitLanding({ msg }) {
+
+  const navigate = useNavigate();
+
   return (
     <div className="virtuousPage">
       <div className="virtuousSplit">
-        {/* LEFT 65% (opaque panel, blocked from floaters) */}
         <aside className="virtuousLeft noFloatersEffect">
+          <VirtuousLeftNav />
+
           <div className="virtuousLeftInner">
             <h1 className="virtuousBrand">VIRTUOUS</h1>
             <p className="virtuousMission">
@@ -23,30 +29,27 @@ export default function SplitLanding({ msg }) {
           </div>
         </aside>
 
-        {/* RIGHT 35% (transparent canvas so floaters show in empty space) */}
         <main className="virtuousRight">
-          {/* Top text sits on a token surface (blocked so floaters don't spawn on it) */}
-          <div className="virtuousTopCard card noFloatersEffect">
-            <div className="virtuousRightTitle">Welcome back</div>
+          <div className="virtuousTopCard cardTitle noFloatersEffect">
+            <div className="virtuousRightTitle">Our Tools</div>
             <div className="virtuousRightSubtitle">
-              Choose an action to continue.
+              Towards a more accepting and validating clinical and patient stories.
             </div>
           </div>
 
-          {/* Middle buttons (blocked) */}
           <div className="virtuousRightCenter">
             <div className="virtuousButtonRow noFloatersEffect" data-interactive="true">
-              <button className="virtuousBtn virtuousBtnPrimary">Patient: Emulator</button>
+              <button className="virtuousBtn virtuousBtnPrimary" onClick={() => navigate("/emulator")}>Patient: Emulator</button>
               <button className="virtuousBtn virtuousBtnSecondary">Clinicians: Info and Data</button>
+              <button className="virtuousBtn virtuousBtnPrimary" onClick={() => navigate("/floaters")}>
+                HeatMap
+            </button>
+
             </div>
           </div>
 
-          {/* Bottom-right button (blocked) */}
           <div className="virtuousRightBottom">
-            <button
-              className="virtuousBtn virtuousBtnCorner noFloatersEffect"
-              data-interactive="true"
-            >
+            <button className="virtuousBtn virtuousBtnCorner noFloatersEffect" data-interactive="true">
               Contact
             </button>
           </div>

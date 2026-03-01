@@ -1,0 +1,169 @@
+.floaterPerceptionPage {
+  min-height: 100vh;
+  padding: var(--s-6);
+}
+
+.floaterPerceptionGrid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: var(--s-5);
+  min-height: calc(100vh - var(--s-6) * 2);
+}
+
+.floaterPerceptionLeft {
+  padding: var(--s-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+
+.floaterPerceptionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.floaterPerceptionTitle {
+  font-size: var(--text-xl);
+  font-weight: 750;
+  line-height: var(--lh-tight);
+  letter-spacing: 0.02em;
+}
+
+.floaterPerceptionSub {
+  margin-top: var(--s-2);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: var(--lh-relaxed);
+  max-width: 42ch;
+}
+
+.floaterPerceptionSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--border);
+}
+
+.floaterPerceptionSectionLabel {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted-2);
+}
+
+.floaterPerceptionRow {
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.floaterPerceptionRowWrap {
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.floaterPerceptionBtnActive {
+  border-color: var(--primary) !important;
+}
+
+.floaterPerceptionSliderRow {
+  display: grid;
+  grid-template-columns: 60px 1fr 70px;
+  gap: var(--s-2);
+  align-items: center;
+}
+
+.floaterPerceptionSliderLabel {
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.floaterPerceptionSlider {
+  width: 100%;
+}
+
+.floaterPerceptionSliderValue {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.floaterPerceptionHint {
+  color: var(--muted-2);
+  font-size: var(--text-xs);
+  line-height: var(--lh-relaxed);
+}
+
+.floaterPerceptionRight {
+  padding: var(--s-4);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  overflow: hidden;
+}
+
+.floaterPerceptionCanvasWrap {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+}
+
+.floaterPerceptionCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.floaterPerceptionFooter {
+  margin-top: var(--s-4);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.floaterPerceptionFooterLabel {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted-2);
+}
+
+.floaterPerceptionFooterText {
+  margin-top: var(--s-2);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  max-width: 70ch;
+}
+
+.floaterPerceptionFooterRight {
+  display: flex;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.floaterPerceptionPill {
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 8px 10px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface-2) 75%, transparent);
+  color: var(--muted);
+}
+
+@media (max-width: 980px) {
+  .floaterPerceptionGrid {
+    grid-template-columns: 1fr;
+  }
+}
