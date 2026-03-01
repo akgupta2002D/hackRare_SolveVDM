@@ -9,6 +9,7 @@ import HeatmapExam from "./pages/HeatMapExam";
 import Emulator from "./eric_code/Emulator";
 import Emergency from "./pages/Emergency";
 import SessionsPage from "./pages/Sessionpage";
+import ClinicalDataPage from "./pages/ClinicalDataPage";
 
 export default function App() {
   const [msg, setMsg] = useState("Loading...");
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/floaters" element={<FloaterStudio />} />
         <Route path="/perception" element={<FloaterPerception />} />
         <Route path="/sessions" element={<SessionsPage />} />
+        <Route path="/clinical" element={<ClinicalDataPage />} />
         <Route
           path="/exam/floater-heatmap"
           element={
