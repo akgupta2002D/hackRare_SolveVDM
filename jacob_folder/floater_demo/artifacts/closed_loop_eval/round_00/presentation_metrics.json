@@ -1,0 +1,42 @@
+{
+  "overall_accuracy": 0.4636,
+  "per_class": {
+    "dots": {
+      "precision": 0.2154,
+      "recall": 0.53,
+      "support": 100
+    },
+    "strands": {
+      "precision": 0.8182,
+      "recall": 0.4534,
+      "support": 1608
+    },
+    "membranes": {
+      "precision": 0.1543,
+      "recall": 0.125,
+      "support": 200
+    },
+    "rings": {
+      "precision": 0.7346,
+      "recall": 0.6575,
+      "support": 400
+    }
+  },
+  "buckets": {
+    "clean": {
+      "matched_accuracy": 0.6869,
+      "detection_ratio": 1.23,
+      "ring_recall": 0.88
+    },
+    "small_ring": {
+      "matched_accuracy": 0.435,
+      "detection_ratio": 0.6667,
+      "ring_recall": 0.435
+    },
+    "overlap": {
+      "matched_accuracy": 0.8102,
+      "detection_ratio": 0.4233,
+      "ring_recall": 0.0
+    }
+  }
+}

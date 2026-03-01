@@ -36,7 +36,11 @@ def preprocess_image(path: str | Path, config: PreprocessConfig) -> PreprocessRe
 
 
 def _normalize_background(grayscale: np.ndarray, config: PreprocessConfig) -> np.ndarray:
-    return grayscale
+    clahe = cv2.createCLAHE(
+        clipLimit=config.clahe_clip_limit,
+        tileGridSize=(config.clahe_tile_grid_size, config.clahe_tile_grid_size),
+    )
+    return clahe.apply(grayscale)
 
 
 def _threshold_and_clean(grayscale: np.ndarray, normalized: np.ndarray, config: PreprocessConfig) -> np.ndarray:
@@ -49,7 +53,17 @@ def _threshold_and_clean(grayscale: np.ndarray, normalized: np.ndarray, config: 
         config.adaptive_c,
     )
     raw_mask = cv2.threshold(grayscale, config.raw_dark_threshold, 255, cv2.THRESH_BINARY_INV)[1]
-    binary = cv2.bitwise_or(mask, raw_mask)
+    support_kernel = cv2.getStructuringElement(
+        cv2.MORPH_ELLIPSE,
+        (config.raw_support_dilate_size, config.raw_support_dilate_size),
+    )
+    mask_support = cv2.dilate(mask, support_kernel)
+    supported_raw = cv2.bitwise_and(raw_mask, mask_support)
+    adaptive_coverage = float(np.count_nonzero(mask)) / max(mask.shape[0] * mask.shape[1], 1)
+    if adaptive_coverage <= config.raw_mask_gate_coverage_max:
+        binary = cv2.bitwise_or(mask, supported_raw)
+    else:
+        binary = mask
 
     kernel_open = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (config.morph_open_size, config.morph_open_size))
     kernel_close = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (config.morph_close_size, config.morph_close_size))

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict
+import json
 from pathlib import Path
 
 from .config import DemoConfig
@@ -15,6 +16,7 @@ def infer_image(
     png_path: str | Path,
     config: DemoConfig,
     save_debug_masks: bool = False,
+    debug_instance_dir: str | Path | None = None,
 ) -> dict[str, object]:
     pre = preprocess_image(png_path, config.preprocess)
     components = segment_instances(pre.binary_mask, config.segment)
@@ -23,8 +25,20 @@ def infer_image(
 
     instances: list[dict[str, object]] = []
     for component in components:
-        features = compute_features(pre.grayscale, component)
+        features = compute_features(
+            pre.grayscale,
+            component,
+            debug_dir=debug_instance_dir,
+            debug_prefix=f"instance_{component.id:03d}" if debug_instance_dir is not None else None,
+        )
         prediction = classify_instance(features, config.rules)
+        if debug_instance_dir is not None:
+            _save_rule_debug(
+                output_dir=debug_instance_dir,
+                prefix=f"instance_{component.id:03d}",
+                prediction=prediction,
+                features=features.to_dict(),
+            )
         bbox = list(component.bbox)
         contour = mask_to_contour(component.mask)
         instances.append(
@@ -120,3 +134,21 @@ def _count_labels(instances: list[dict[str, object]]) -> dict[str, int]:
     for instance in instances:
         counts[str(instance["label"])] += 1
     return counts
+
+
+def _save_rule_debug(
+    output_dir: str | Path,
+    prefix: str,
+    prediction: object,
+    features: dict[str, object],
+) -> None:
+    path = Path(output_dir)
+    path.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "label": prediction.label,
+        "confidence": prediction.confidence,
+        "explanation": prediction.explanation,
+        "features": features,
+    }
+    with (path / f"{prefix}_decision.json").open("w", encoding="utf-8") as handle:
+        json.dump(payload, handle, indent=2)
