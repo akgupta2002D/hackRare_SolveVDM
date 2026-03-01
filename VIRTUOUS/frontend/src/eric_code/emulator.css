@@ -91,7 +91,6 @@
 .symptomGraphWrap {
     margin-top: var(--s-4);
     padding: var(--s-4);
-    max-width: 760px;
 }
 
 .symptomGraphHead {

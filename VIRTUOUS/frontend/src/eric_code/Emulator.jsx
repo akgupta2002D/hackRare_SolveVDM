@@ -19,6 +19,13 @@ const Emulator = () => {
         <section className="emulatorLeft card">
           <div className="emulatorLeftInner">
             <h1 className="emulatorTitle">Perception Emulator</h1>
+
+            <div className="virtuousStatementRow" aria-label="Virtuous values">
+              <div className="virtuousStatement virtuousStatementNavy">Acknowledge</div>
+              <div className="virtuousStatement virtuousStatementRed">Believe</div>
+              <div className="virtuousStatement virtuousStatementGreen">Community</div>
+            </div>
+            
             <p className="emulatorSubtitle">
               Scan this code on your phone to connect to the emulator workflow.
             </p>
@@ -54,7 +61,6 @@ const Emulator = () => {
               </p>
             </div>
 
-            <SymptomWordGraph />
           </div>
         </section>
 

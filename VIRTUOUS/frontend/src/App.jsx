@@ -11,6 +11,7 @@ import Emergency from "./pages/Emergency";
 import SessionsPage from "./pages/Sessionpage";
 import ClinicalDataPage from "./pages/ClinicalDataPage";
 import VirtuousResourcesPage from "./pages/VirtuousResourcesPage";
+import FloatersApiDocs from "./pages/FloatersApiDocs";
 
 export default function App() {
   const [msg, setMsg] = useState("Loading...");
@@ -33,7 +34,7 @@ export default function App() {
         <Route path="/sessions" element={<SessionsPage />} />
         <Route path="/clinical" element={<ClinicalDataPage />} />
         <Route path="/resources" element={<VirtuousResourcesPage />} />
-
+        <Route path="/api_docs" element={<FloatersApiDocs />} />
         <Route
           path="/exam/floater-heatmap"
           element={

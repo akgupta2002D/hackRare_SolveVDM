@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import "./resourcepage.css";
 import { useNavigate } from "react-router-dom";
+import SymptomWordGraph from "../eric_code/SymptomWordGraph";
 
 const AUDIENCES = {
   CLINICAL: "Clinicians & Researchers",
@@ -283,6 +284,8 @@ export default function VirtuousResourcesPage() {
           </div>
         </section>
 
+
+
         {/* Clinician/researcher overview (still readable for families) */}
         <section className="virtuousBlock">
           <div className="virtuousBlockHeader">
@@ -321,6 +324,8 @@ export default function VirtuousResourcesPage() {
             </div>
           )}
         </section>
+
+        <SymptomWordGraph />
 
         {/* Research library */}
         <section className="virtuousBlock">

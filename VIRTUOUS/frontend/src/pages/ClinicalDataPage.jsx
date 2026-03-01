@@ -100,7 +100,7 @@ export default function ClinicalDataPage() {
 
               <a
                 className={`${styles.actionBtn} ${styles.actionOutline}`}
-                href="#api-access"
+                href="/api_docs"
               >
                 🛠️  API request to access data
               </a>
