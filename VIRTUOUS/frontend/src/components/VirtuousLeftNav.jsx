@@ -10,7 +10,7 @@ return (
 
             <nav className="virtuousLeftNavActions">
                 <button
-                    className="virtuousNavBtn virtuousNavBtn virtuousNavBtnEmergency"
+                    className=" virtuousNavBtnEmergency  "
                     onClick={() => navigate("/emergency")}
                 >
                     🚨 Seeing New Floaters
@@ -18,9 +18,9 @@ return (
 
                 <button
                     className="virtuousNavBtn virtuousNavBtn"
-                    onClick={() => navigate("/about")}
+                    onClick={() => navigate("/future")}
                 >
-                    About Us
+                    🛠️ Future Direction
                 </button>
                 <button
                     className="virtuousNavBtn virtuousNavBtn"
@@ -29,16 +29,10 @@ return (
                     Resources
                 </button>
                 <button
-                    className="virtuousNavBtn virtuousNavBtn"
-                    onClick={() => navigate("/contact")}
-                >
-                    Contact
-                </button>
-                <button
                     className="virtuousNavBtn virtuousNavBtn virtuousNavBtnPrimary"
                     onClick={() => navigate("/signin")}
                 >
-                    Sign In
+                   🛠️ Sign In 
                 </button>
             </nav>
         </div>

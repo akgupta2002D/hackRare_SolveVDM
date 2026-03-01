@@ -91,7 +91,7 @@ export default function ClinicalDataPage() {
                 className={`${styles.actionBtn} ${styles.actionGhost}`}
                 href="/resources"
               >
-                Resources to understand it better
+                🛠️  Resources to understand it better
               </a>
               <p className={styles.toolDescription}>
                 Practical guides, FAQs, and clinician-facing notes to help validate
@@ -102,7 +102,7 @@ export default function ClinicalDataPage() {
                 className={`${styles.actionBtn} ${styles.actionOutline}`}
                 href="#api-access"
               >
-                API request to access data
+                🛠️  API request to access data
               </a>
               <p className={styles.toolDescription}>
                 For research and clinical integration—request structured access to
