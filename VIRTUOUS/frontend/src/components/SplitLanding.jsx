@@ -1,5 +1,5 @@
 import React from "react";
-import "./splitLanding.css";
+import "./splitlanding.css";
 import VirtuousLeftNav from "./VirtuousLeftNav";
 import { useNavigate } from "react-router-dom";
 
