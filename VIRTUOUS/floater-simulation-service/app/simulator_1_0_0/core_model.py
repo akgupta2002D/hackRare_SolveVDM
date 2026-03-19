@@ -18,18 +18,24 @@ def compute_forward_model(
     """Compute percept outputs from disturbance + optical context."""
     validate_inputs(disturbance, optical_context)
 
-    # MVP relationships:
-    # - closer disturbance => bigger shadow
-    # - closer disturbance => sharper edges
-    # - opacity directly controls how dark the artifact feels
+    # MVP relationships (aligned with the experiment guide):
+    # - far -> near (depthZ decreases): apparentSize ↓ and apparentBlur ↓
+    # - far -> near: apparentDarkness ↑
     #
-    # For MVP, we don't apply ambientBrightness/pupilSize yet. We still take
-    # optical_context as an input so it can be used later without changing
-    # the public function signature.
+    # For MVP, we don't use ambientBrightness/pupilSize yet. We keep optical_context
+    # in the signature so we can expand later without changing the API.
     depth = disturbance.depthZ
-    apparent_size = disturbance.size / depth
-    apparent_blur = 1.0 / depth
-    apparent_darkness = disturbance.opacity
+
+    # Bigger depth => bigger shadow on the retina (so near => smaller).
+    apparent_size = disturbance.size * depth
+
+    # Bigger depth => more blur (so near => sharper edges).
+    apparent_blur = depth
+
+    # Darkness increases as the disturbance gets closer to the retina.
+    apparent_darkness = disturbance.opacity / depth
+    if apparent_darkness > 1.0:
+        apparent_darkness = 1.0
 
     return PerceptOutput(
         apparentSize=apparent_size,
