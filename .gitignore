@@ -237,6 +237,7 @@ Thumbs.db
 # local tooling / caches
 **/.cache/
 **/.parcel-cache/
+**/.mpl_cache/
 **/.turbo/
 **/.vite/
 **/.eslintcache
