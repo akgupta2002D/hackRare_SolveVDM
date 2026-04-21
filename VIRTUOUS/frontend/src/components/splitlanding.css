@@ -283,6 +283,15 @@
   border-color: var(--primary);
 }
 
+.virtuousNavBtnMenu {
+  display: none;
+}
+
+.virtuousMobileMenuBackdrop,
+.virtuousMobileDrawer {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .virtuousLeftInner {
     padding-top: calc(var(--s-6) + 72px);
@@ -356,10 +365,61 @@
   .virtuousLeft, .virtuousRight { padding: var(--s-4); }
   .virtuousLeftNav { position: static; backdrop-filter: none; -webkit-backdrop-filter: none; }
   .virtuousLeftInner { padding-top: var(--s-3); }
-  .virtuousLeftNavInner { flex-direction: column; align-items: stretch; }
-  .virtuousLeftNavActions { justify-content: flex-start; }
+  .virtuousLeftNavInner { align-items: center; justify-content: space-between; }
+  .virtuousLeftNavActions { justify-content: flex-end; width: 100%; }
   .virtuousButtonRow, .virtuousNavRow { width: 100%; max-width: 100%; }
   .virtuousBtn, .virtuousNavBtn, .virtuousNavBtnEmergency { width: 100%; }
+  .virtuousNavBtnEmergency {
+    width: auto;
+    flex: 1 1 auto;
+  }
+  .virtuousNavBtnDesktop {
+    display: none;
+  }
+  .virtuousNavBtnMenu {
+    display: inline-flex;
+    width: auto;
+  }
+  .virtuousMobileMenuBackdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 60;
+  }
+  .virtuousMobileMenuBackdrop.isOpen {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .virtuousMobileDrawer {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(84vw, 340px);
+    padding: var(--s-4);
+    gap: var(--s-2);
+    background: var(--surface);
+    border-left: 1px solid var(--border-strong);
+    box-shadow: var(--shadow);
+    transform: translateX(100%);
+    transition: transform 0.24s ease;
+    z-index: 70;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .virtuousMobileDrawer.isOpen {
+    transform: translateX(0);
+  }
+  .virtuousMobileDrawerClose {
+    width: auto;
+    align-self: flex-end;
+    min-width: 44px;
+  }
 }
 
 @media (max-width: 520px) {
