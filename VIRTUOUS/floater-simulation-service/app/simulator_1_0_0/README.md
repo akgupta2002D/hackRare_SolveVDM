@@ -5,8 +5,6 @@ It turns:
 
 `disturbance + optical_context -> percept_output`
 
-There is currently **no HTTP endpoint here**; the endpoint (in `app/routes.py` / future `api_models.py`) should call these modules in the flow below.
-
 ## What each module contains
 
 - `disturbance.py`: data model for the numerical disturbance input
@@ -38,3 +36,11 @@ There is currently **no HTTP endpoint here**; the endpoint (in `app/routes.py` /
 - The math is intentionally simple for MVP.
 - `optical_context` is accepted by the core model so we can expand the relationships later (without changing the public function signature).
 
+## Experiments & visualization
+
+- **`experiments/depth_sweep_test.py`** — sweeps 5 `depthZ` values with fixed `size` / `opacity` / context; runs `compute_forward_model`, prints a table, and asserts monotonic trends (far → near).
+- **`experiments/visualization/visualization.py`** — Matplotlib **1×5** figure: one panel per depth; maps `apparentSize` → circle size, `apparentBlur` → edge softness, `apparentDarkness` → intensity. Run from `floater-simulation-service`:  
+  `.venv/bin/python app/simulator_1_0_0/experiments/visualization/visualization.py --save path/to/out.png`
+- **`experiments/visualization/depth_sweep.png`** — example output from that script.
+
+Deps for visualization live in the service root **`requirements.txt`** (`matplotlib`, `numpy`). Matplotlib cache dirs (e.g. `.mpl_cache`) are ignored at repo root via `.gitignore`.
