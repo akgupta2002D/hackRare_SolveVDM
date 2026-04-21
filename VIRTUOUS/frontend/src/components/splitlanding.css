@@ -363,10 +363,12 @@
 
 @media (max-width: 768px) {
   .virtuousLeft, .virtuousRight { padding: var(--s-4); }
+  .virtuousLeft { align-items: flex-start; }
   .virtuousLeftNav { position: static; backdrop-filter: none; -webkit-backdrop-filter: none; }
   .virtuousLeftInner { padding-top: var(--s-3); }
-  .virtuousLeftNavInner { align-items: center; justify-content: space-between; }
-  .virtuousLeftNavActions { justify-content: flex-end; width: 100%; }
+  .virtuousLeftNavInner { align-items: stretch; justify-content: flex-start; }
+  .virtuousLeftNavBrand { display: none; }
+  .virtuousLeftNavActions { justify-content: space-between; width: 100%; }
   .virtuousButtonRow, .virtuousNavRow { width: 100%; max-width: 100%; }
   .virtuousBtn, .virtuousNavBtn, .virtuousNavBtnEmergency { width: 100%; }
   .virtuousNavBtnEmergency {
@@ -379,6 +381,15 @@
   .virtuousNavBtnMenu {
     display: inline-flex;
     width: auto;
+    flex: 0 0 auto;
+  }
+  .virtuousBrand,
+  .virtuousMission,
+  .virtuousToolDescription {
+    text-align: left;
+  }
+  .virtuousStatementRow {
+    justify-content: flex-start;
   }
   .virtuousMobileMenuBackdrop {
     display: block;
