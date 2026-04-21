@@ -206,3 +206,16 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .floaterStudioPage { padding: var(--s-4); }
+  .floaterStudioLeft, .floaterStudioRight { padding: var(--s-3); }
+  .floaterStudioSliderRow { grid-template-columns: 56px 1fr 56px; }
+  .floaterStudioFooter { flex-direction: column; align-items: stretch; }
+  .floaterStudioFooterRight { justify-content: flex-start; }
+  .floaterModalOverlay { padding: var(--s-3); }
+}
+
+@media (max-width: 520px) {
+  .floaterStudioPage { padding: var(--s-3); }
+}

@@ -299,3 +299,14 @@
     height: 70vh;
   }
 }
+
+@media (max-width: 768px) {
+  .heatmapLeft, .heatmapRight { padding: var(--s-4); }
+  .heatmapCanvasWrap { height: 62vh; }
+  .heatmapThumbRow { justify-content: flex-start; overflow-x: auto; }
+  .heatmapFooterRow { flex-direction: column; align-items: stretch; }
+}
+
+@media (max-width: 520px) {
+  .heatmapLeft, .heatmapRight { padding: var(--s-3); }
+}

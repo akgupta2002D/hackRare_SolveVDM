@@ -322,3 +322,14 @@
   background: var(--red-2);
   box-shadow: 0 8px 24px rgba(122, 28, 31, 0.35);
 }
+
+@media (max-width: 768px) {
+  .left, .right { padding: var(--s-4); }
+  .backBtn { position: static; margin: var(--s-3) 0 0 var(--s-3); }
+  .leftInner { padding-top: var(--s-2); }
+  .title { font-size: clamp(24px, 8vw, 34px); }
+}
+
+@media (max-width: 520px) {
+  .left, .right { padding: var(--s-3); }
+}

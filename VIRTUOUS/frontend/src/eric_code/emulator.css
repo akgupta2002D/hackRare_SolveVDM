@@ -207,3 +207,12 @@
         padding-top: 56px;
     }
 }
+
+@media (max-width: 768px) {
+  .emulatorLeft, .emulatorRight { padding: var(--s-4); }
+  .emulatorBackBtn { position: static; margin: var(--s-3) 0 0 var(--s-3); }
+  .emulatorLeftInner { padding-top: var(--s-2); }
+  .emulatorTitle { font-size: clamp(26px, 8vw, 36px); }
+  .wordCloud { min-height: 240px; }
+  .wordCloudSvg { height: 240px; }
+}

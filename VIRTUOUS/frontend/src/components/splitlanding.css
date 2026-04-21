@@ -351,3 +351,18 @@
 .virtuousToolDescription:hover {
   opacity: 0.9; /* subtle clarity on hover */
 }
+
+@media (max-width: 768px) {
+  .virtuousLeft, .virtuousRight { padding: var(--s-4); }
+  .virtuousLeftNav { position: static; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .virtuousLeftInner { padding-top: var(--s-3); }
+  .virtuousLeftNavInner { flex-direction: column; align-items: stretch; }
+  .virtuousLeftNavActions { justify-content: flex-start; }
+  .virtuousButtonRow, .virtuousNavRow { width: 100%; max-width: 100%; }
+  .virtuousBtn, .virtuousNavBtn, .virtuousNavBtnEmergency { width: 100%; }
+}
+
+@media (max-width: 520px) {
+  .virtuousBrand { font-size: clamp(30px, 9vw, 40px); }
+  .virtuousMission { font-size: var(--text-sm); }
+}

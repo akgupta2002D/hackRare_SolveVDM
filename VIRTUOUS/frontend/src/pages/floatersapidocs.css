@@ -472,3 +472,10 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .apiContainer { padding-top: var(--s-4); padding-bottom: var(--s-4); }
+  .apiHeader, .apiSide, .apiSection, .apiEndpoint { padding: var(--s-3); }
+  .apiTopRow { flex-direction: column; align-items: flex-start; }
+  .apiMeta { margin-left: 0; }
+}

@@ -167,3 +167,15 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .floaterPerceptionPage { padding: var(--s-4); }
+  .floaterPerceptionLeft, .floaterPerceptionRight { padding: var(--s-3); }
+  .floaterPerceptionSliderRow { grid-template-columns: 56px 1fr 56px; }
+  .floaterPerceptionFooter { flex-direction: column; align-items: stretch; }
+  .floaterPerceptionFooterRight { justify-content: flex-start; }
+}
+
+@media (max-width: 520px) {
+  .floaterPerceptionPage { padding: var(--s-3); }
+}
